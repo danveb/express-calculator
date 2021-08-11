@@ -30,6 +30,20 @@ function getMean(nums) {
     return total/nums.length; 
 }
 
+// find Median
+function getMedian(nums) {
+    let median = 0, count = nums.length;
+    // sort array from low-to-high 
+    let sortedArr = nums.sort(function(a, b){return a-b})
+    sortedArr.sort();
+    if (count % 2 === 0) {  // is even
+        median = (sortedArr[count / 2 - 1] + sortedArr[count / 2]) / 2;
+    } else { // is odd
+        median = sortedArr[(count - 1) / 2];
+    }
+    return median;
+}
+
 // Route Handler /mean (average)
 app.get('/mean', function(req, res, next) {
     // console.log(req.query) // {nums: '1,2,3'}
@@ -42,6 +56,14 @@ app.get('/mean', function(req, res, next) {
 });
 
 // Route Handler /median (midpoint)
+app.get('/median', (req, res, next) => {
+    let nums = getNums(req.query.nums)
+    let result = getMedian(nums)
+    return res.json({
+        operation: "median",
+        value: result 
+    })
+})
 
 // Route Handler /mode (most frequent)
 
