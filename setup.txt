@@ -1,0 +1,2 @@
+npm install express nodemon 
+node_modules/ > .gitignore 
